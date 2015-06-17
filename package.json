@@ -4,6 +4,7 @@
   "description": "React Sound component using soundmanager2",
   "main": "lib/index.js",
   "scripts": {
+    "start": "cd examples && webpack-dev-server --port 3000 --progress --inline --hot --devtool eval-source-map",
     "build": "npm run lint && babel src --out-dir lib",
     "clean": "rimraf ./lib",
     "lint": "eslint src test",

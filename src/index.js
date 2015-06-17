@@ -1,5 +1,7 @@
-import React from 'react';
-import soundManager from 'soundmanager2';
+import React, {PropTypes as T} from 'react';
+import { soundManager } from 'soundmanager2';
+
+function noop() {}
 
 const playStatuses = {
   PLAYING: 'PLAYING',
@@ -9,6 +11,23 @@ const playStatuses = {
 
 export default class Sound extends React.Component {
   static status = playStatuses;
+
+  static propTypes = {
+    url: T.string.isRequired,
+    playStatus: T.oneOf(playStatuses).isRequired,
+    positionInMs: T.number,
+    onLoading: T.func,
+    onLoaded: T.func,
+    onPlaying: T.func,
+    onFinishedPlaying: T.func
+  };
+
+  static defaultProps = {
+    onLoading: noop,
+    onLoaded: noop,
+    onPlaying: noop,
+    onFinishedPlaying: noop
+  };
 
   componentDidMount() {
     this.createSound();
@@ -62,12 +81,10 @@ export default class Sound extends React.Component {
         });
       },
       whileplaying() {
-        props.onPlaying({
-          positionInMs: this.position
-        });
+        props.onPlaying(this.position);
       },
       onfinish() {
-        props.onFinishPlaying();
+        props.onFinishedPlaying();
       }
     });
   }
