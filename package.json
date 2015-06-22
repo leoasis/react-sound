@@ -18,7 +18,7 @@
   "author": "Leonardo Andres Garcia Crespo <leoasis@gmail.com>",
   "license": "ISC",
   "homepage": "https://github.com/leoasis/react-sound",
-  "dependencies": {
+  "peerDependencies": {
     "soundmanager2": "^2.97.20150601-a",
     "react": "^0.13.3"
   },

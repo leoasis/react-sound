@@ -15,16 +15,16 @@ export default class Sound extends React.Component {
   static propTypes = {
     url: T.string.isRequired,
     playStatus: T.oneOf(playStatuses).isRequired,
-    positionInMs: T.number,
+    position: T.number,
+    startFromPosition: T.number,
     onLoading: T.func,
-    onLoaded: T.func,
     onPlaying: T.func,
     onFinishedPlaying: T.func
   };
 
   static defaultProps = {
+    startFromPosition: 0,
     onLoading: noop,
-    onLoaded: noop,
     onPlaying: noop,
     onFinishedPlaying: noop
   };
@@ -58,10 +58,16 @@ export default class Sound extends React.Component {
       }
     }
 
-    if (this.sound.position !== this.props.positionInMs &&
-      Math.round(this.sound.position) !== Math.round(this.props.positionInMs)) {
+    if (this.props.startFromPosition !== prevProps.startFromPosition) {
+      this.sound.setPosition(this.props.startFromPosition);
+    }
 
-      this.sound.setPosition(this.props.positionInMs);
+    if (this.sound.position != null) {
+      if (this.sound.position !== this.props.position &&
+        Math.round(this.sound.position) !== Math.round(this.props.position)) {
+
+        this.sound.setPosition(this.props.position);
+      }
     }
   }
 
@@ -76,12 +82,10 @@ export default class Sound extends React.Component {
     this.sound = soundManager.createSound({
       url: this.props.url,
       whileloading() {
-        props.onLoading({
-          loadedPercentage: 100 * this.bytesLoaded / this.bytesTotal
-        });
+        props.onLoading(this);
       },
       whileplaying() {
-        props.onPlaying(this.position);
+        props.onPlaying(this);
       },
       onfinish() {
         props.onFinishedPlaying();

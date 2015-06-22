@@ -35,9 +35,8 @@ export default class Example extends React.Component {
         <Sound
           url={this.state.currentSong.url}
           playStatus={this.state.playStatus}
-          positionInMs={this.state.position}
+          playFromPosition={this.state.position}
           onLoading={() => {}}
-          onLoaded={() => {}}
           onPlaying={position => this.setState({position})}
           onFinishedPlaying={() => this.setState({playStatus: Sound.status.STOPPED})} />}
     </div>;
