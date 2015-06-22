@@ -29,7 +29,7 @@ Yes! It's really easy to use sounds in your app as part of the component tree in
 
 ## How to install
 
-`npm install react-soud --save`
+`npm install react-sound --save`
 
 ## How to use
 
