@@ -14,16 +14,16 @@ export default class Sound extends React.Component {
 
   static propTypes = {
     url: T.string.isRequired,
-    playStatus: T.oneOf(playStatuses).isRequired,
+    playStatus: T.oneOf(Object.keys(playStatuses)).isRequired,
     position: T.number,
-    startFromPosition: T.number,
+    playFromPosition: T.number,
     onLoading: T.func,
     onPlaying: T.func,
     onFinishedPlaying: T.func
   };
 
   static defaultProps = {
-    startFromPosition: 0,
+    playFromPosition: 0,
     onLoading: noop,
     onPlaying: noop,
     onFinishedPlaying: noop
@@ -58,11 +58,11 @@ export default class Sound extends React.Component {
       }
     }
 
-    if (this.props.startFromPosition !== prevProps.startFromPosition) {
-      this.sound.setPosition(this.props.startFromPosition);
+    if (this.props.playFromPosition !== prevProps.playFromPosition) {
+      this.sound.setPosition(this.props.playFromPosition);
     }
 
-    if (this.sound.position != null) {
+    if (this.props.position != null) {
       if (this.sound.position !== this.props.position &&
         Math.round(this.sound.position) !== Math.round(this.props.position)) {
 
