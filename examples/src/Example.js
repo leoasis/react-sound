@@ -9,9 +9,9 @@ export default class Example extends React.Component {
     super(props);
 
     this.state = {
-      currentSong: null,
+      currentSong: songs[0],
       position: 0,
-      playStatus: Sound.status.STOPPED
+      playStatus: Sound.status.PLAYING
     };
   }
 
