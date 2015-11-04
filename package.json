@@ -21,7 +21,7 @@
   "homepage": "https://github.com/leoasis/react-sound",
   "peerDependencies": {
     "soundmanager2": "^2.97.20150601-a",
-    "react": "^0.13.3"
+    "react": ">=0.13.3 <0.15.0"
   },
   "devDependencies": {
     "rimraf": "^2.4.0",
