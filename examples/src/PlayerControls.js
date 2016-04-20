@@ -5,7 +5,7 @@ function control(text, clickHandler) {
   const onClick = (ev) => {
     ev.preventDefault();
     clickHandler();
-  }
+  };
   return <li><a href="#" onClick={onClick}>{text}</a></li>;
 }
 
@@ -21,7 +21,7 @@ export default class PlayerControls extends React.Component {
       play: this.props.playStatus === Sound.status.STOPPED,
       stop: this.props.playStatus !== Sound.status.STOPPED,
       pause: this.props.playStatus === Sound.status.PLAYING,
-      resume: this.props.playStatus === Sound.status.PAUSED,
+      resume: this.props.playStatus === Sound.status.PAUSED
     };
 
     return <ul>

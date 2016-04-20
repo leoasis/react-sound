@@ -42,13 +42,26 @@ export default class Example extends React.Component {
     </div>;
   }
 
+  getStatusText() {
+    switch(this.state.playStatus) {
+      case Sound.status.PLAYING:
+        return 'playing';
+      case Sound.status.PAUSED:
+        return 'paused';
+      case Sound.status.STOPPED:
+        return 'stopped';
+      default:
+        return '(unknown)';
+    }
+  }
+
   renderCurrentSong() {
     return <p>
-      Currently playing {this.state.currentSong.title}
+      Current song {this.state.currentSong.title}. Song is {this.getStatusText()}
     </p>;
   }
 
   handleSongSelected(song) {
-    this.setState({currentSong: song, position: 0, playStatus: Sound.status.STOPPED});
+    this.setState({currentSong: song, position: 0});
   }
 }

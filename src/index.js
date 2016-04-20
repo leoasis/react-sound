@@ -69,15 +69,19 @@ export default class Sound extends React.Component {
       if (!sound) { return; }
 
       if (this.props.playStatus === playStatuses.PLAYING) {
-        if (prevProps.playStatus === playStatuses.STOPPED) {
+        if (sound.playState === 0) {
           sound.play();
-        } else if (prevProps.playStatus === playStatuses.PAUSED) {
+        }
+
+        if (sound.paused) {
           sound.resume();
         }
-      } else if (this.props.playStatus === playStatuses.STOPPED && prevProps.playStatus !== playStatuses.STOPPED) {
-        sound.stop();
-      } else {// 'PAUSED'
-        if (prevProps.playStatus === playStatuses.PLAYING) {
+      } else if (this.props.playStatus === playStatuses.STOPPED) {
+        if (sound.playState !== 0) {
+          sound.stop();
+        }
+      } else { // this.props.playStatus === playStatuses.PAUSED
+        if (!sound.paused) {
           sound.pause();
         }
       }
