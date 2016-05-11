@@ -97,6 +97,14 @@ export default class Sound extends React.Component {
           sound.setPosition(this.props.position);
         }
       }
+
+      if (this.props.playbackRate !== prevProps.playbackRate) {
+        if (this.props.playbackRate) {
+          sound.setPlaybackRate(this.props.playbackRate);
+        } else {
+          sound.setPlaybackRate(1);
+        }
+      }
     };
 
     if (this.props.url !== prevProps.url) {
