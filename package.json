@@ -20,7 +20,7 @@
   "license": "ISC",
   "homepage": "https://github.com/leoasis/react-sound",
   "peerDependencies": {
-    "soundmanager2": "^2.97.20150601-a",
+    "soundmanager2": "git://github.com/scottschiller/SoundManager2#7d5e24ac38356e18efe91bc01e159f24bf2dd898",
     "react": ">=0.13.3 <16.0.0"
   },
   "devDependencies": {
