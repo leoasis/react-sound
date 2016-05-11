@@ -50,7 +50,7 @@ var MyComponentWithSound = React.createClass({
 * *url (string)*: The url of the sound to play.
 * *playStatus (Sound.status.{PLAYING,STOPPED,PAUSED})*: The current sound playing status. Change it in successive renders to play, stop, pause and resume the sound.
 * *playFromPosition (number)*: Seeks to the position specified by this prop, any time it changes. After that, the sound will continue playing (or not, if the `playStatus` is not `PLAYING`). Use this prop to seek to different positions in the sound, but not use it as a controlled component. You should use either this prop or `position`, but not both.
-* *playbackRate (number)*: Increases or decreases the playback rate by the given multiplier
+* *playbackRate (number)*: Increases or decreases the playback rate by the given multiplier. Defaults to 1.0 (normal speed) if the property is not given.
 * *position (number)*: The current position the sound is at. Use this to make the component a controlled component, meaning that you must update this prop on every `onPlaying` callback. You should use either this prop or `playFromPosition`, but not both.
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onPlaying (function)*: Function that gets called while the sound is playing. It receives an object with properties `position` and `duration`.
