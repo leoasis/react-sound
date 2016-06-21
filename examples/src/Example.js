@@ -70,12 +70,4 @@ export default class Example extends React.Component {
   handleSongSelected(song) {
     this.setState({currentSong: song, position: 0});
   }
-
-  handleVolumeIncrease() {
-    this.setState({volume: this.state.volume + 10});
-  }
-
-  handleVolumeDecrease() {
-    this.setState({volume: this.state.volume - 10});
-  }
 }
