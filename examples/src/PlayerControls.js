@@ -24,11 +24,19 @@ export default class PlayerControls extends React.Component {
       resume: this.props.playStatus === Sound.status.PAUSED
     };
 
-    return <ul>
-      {controls.play && control('Play', this.props.onPlay)}
-      {controls.stop && control('Stop', this.props.onStop)}
-      {controls.pause && control('Pause', this.props.onPause)}
-      {controls.resume && control('Resume', this.props.onResume)}
-    </ul>;
+    return (
+      <div>
+        Volume:
+        <button onClick={this.props.onVolumeDown}>-</button>
+        <button onClick={this.props.onVolumeUp}>+</button>
+
+        <ul>
+          {controls.play && control('Play', this.props.onPlay)}
+          {controls.stop && control('Stop', this.props.onStop)}
+          {controls.pause && control('Pause', this.props.onPause)}
+          {controls.resume && control('Resume', this.props.onResume)}
+        </ul>
+      </div>
+    );
   }
 }

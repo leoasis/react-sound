@@ -19,21 +19,22 @@
   "author": "Leonardo Andres Garcia Crespo <leoasis@gmail.com>",
   "license": "ISC",
   "homepage": "https://github.com/leoasis/react-sound",
-  "peerDependencies": {
-    "soundmanager2": "^2.97.20150601-a",
-    "react": ">=0.13.3 <16.0.0"
+  "dependencies": {
+    "react": ">=0.13.3 <16.0.0",
+    "soundmanager2": "^2.97.20150601-a"
   },
   "devDependencies": {
-    "rimraf": "^2.4.0",
-    "eslint": "^0.22.1",
-    "webpack-dev-server": "^1.9.0",
-    "node-libs-browser": "^0.5.2",
-    "webpack": "^1.9.10",
     "babel": "^5.5.6",
-    "react-hot-loader": "^1.2.7",
-    "babel-eslint": "^3.1.15",
     "babel-core": "^5.5.6",
+    "babel-eslint": "^6.0.5",
     "babel-loader": "^5.1.4",
-    "eslint-plugin-react": "^2.5.0"
+    "eslint": "^2.13.1",
+    "eslint-plugin-react": "5.2.2",
+    "node-libs-browser": "^0.5.2",
+    "react-dom": ">=0.14.0 <16.0.0",
+    "react-hot-loader": "^1.2.7",
+    "rimraf": "^2.4.0",
+    "webpack": "^1.9.10",
+    "webpack-dev-server": "^1.9.0"
   }
 }
