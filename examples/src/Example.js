@@ -11,11 +11,14 @@ export default class Example extends React.Component {
     this.state = {
       currentSong: songs[0],
       position: 0,
+      volume: 100,
       playStatus: Sound.status.PLAYING
     };
   }
 
   render() {
+    const { volume } = this.state;
+
     return <div>
       <SongSelector
         songs={songs}
@@ -29,6 +32,8 @@ export default class Example extends React.Component {
         onResume={() => this.setState({playStatus: Sound.status.PLAYING})}
         onStop={() => this.setState({playStatus: Sound.status.STOPPED, position: 0})}
         onSeek={position => this.setState({ position })}
+        onVolumeUp={() => this.setState({volume: volume >= 100 ? volume : volume+10})}
+        onVolumeDown={() => this.setState({volume: volume <= 0 ? volume : volume-10})}
         duration={this.state.currentSong ? this.state.currentSong.duration : 0}
         position={this.state.position} />
       {this.state.currentSong &&
@@ -36,6 +41,7 @@ export default class Example extends React.Component {
           url={this.state.currentSong.url}
           playStatus={this.state.playStatus}
           playFromPosition={this.state.position}
+          volume={this.state.volume}
           onLoading={({bytesLoaded, bytesTotal}) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
           onPlaying={({position}) => console.log(position)}
           onFinishedPlaying={() => this.setState({playStatus: Sound.status.STOPPED})} />}
@@ -63,5 +69,13 @@ export default class Example extends React.Component {
 
   handleSongSelected(song) {
     this.setState({currentSong: song, position: 0});
+  }
+
+  handleVolumeIncrease() {
+    this.setState({volume: this.state.volume + 10});
+  }
+
+  handleVolumeDecrease() {
+    this.setState({volume: this.state.volume - 10});
   }
 }
