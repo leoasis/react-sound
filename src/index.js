@@ -2,12 +2,18 @@ import React, {PropTypes as T} from 'react';
 import { soundManager } from 'soundmanager2';
 
 const pendingCalls = [];
+let initialized = false;
 
 function createSound(options, cb) {
   if (soundManager.ok()) {
     cb(soundManager.createSound(options));
     return () => {};
   } else {
+    if (!initialized) {
+      initialized = true;
+      soundManager.beginDelayedInit();
+    }
+
     const call = () => {
       cb(soundManager.createSound(options));
     };
