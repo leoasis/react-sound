@@ -61,6 +61,7 @@ export default class Sound extends React.Component {
   };
 
   componentDidMount() {
+    soundManager.setup({ignoreMobileRestrictions: true});
     this.createSound(sound => {
       if (this.props.playStatus === playStatuses.PLAYING) {
         sound.play();
