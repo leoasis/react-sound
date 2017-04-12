@@ -44,6 +44,8 @@ var MyComponentWithSound = React.createClass({
 });
 ```
 
+**Note:** By default, a restriction on mobile prevent you from playing multiple sounds. To avoid this, you need to set the `ignoreMobileRestrictions` property to `true` when setting up [soundManager2](http://www.schillmania.com/projects/soundmanager2/doc/).
+
 ### Props
 
 * *url (string)*: The url of the sound to play.
