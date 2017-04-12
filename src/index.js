@@ -1,5 +1,5 @@
 import React, {PropTypes as T} from 'react';
-import { soundManager } from 'soundmanager2';
+import { soundManager } from 'soundmanager2/script/soundmanager2-nodebug-jsmin.js';
 
 const pendingCalls = [];
 let initialized = false;
