@@ -9,13 +9,16 @@ Sound component to play audio in your web apps. Backed by the mighty [soundmanag
 ```js
 // In your React component:
 render() {
-  return <Sound
-    url="cool_sound.mp3"
-    playStatus={Sound.status.PLAYING}
-    playFromPosition={300 /* in milliseconds */}
-    onLoading={this.handleSongLoading}
-    onPlaying={this.handleSongPlaying}
-    onFinishedPlaying={this.handleSongFinishedPlaying} />
+  return (
+    <Sound
+      url="cool_sound.mp3"
+      playStatus={Sound.status.PLAYING}
+      playFromPosition={300 /* in milliseconds */}
+      onLoading={this.handleSongLoading}
+      onPlaying={this.handleSongPlaying}
+      onFinishedPlaying={this.handleSongFinishedPlaying} 
+    />
+  );
 }
 ```
 
@@ -35,13 +38,17 @@ Yes! It's really easy to use sounds in your app as part of the component tree in
 
 ```js
 var React = require('react');
-var Sound = require('react-sound');
+var Sound = require('react-sound').default;
 
-var MyComponentWithSound = React.createClass({
+// ... or using import:
+import React from 'react';
+import Sound from 'react-sound';
+
+class MyComponentWithSound extends React.Component {
   render() {
     return <Sound {...props} />; // Check props in next section
   }
-});
+}
 ```
 
 **Note:** By default, a restriction on mobile prevent you from playing multiple sounds. To avoid this, you need to set the `ignoreMobileRestrictions` property to `true` when setting up [soundManager2](http://www.schillmania.com/projects/soundmanager2/doc/).
