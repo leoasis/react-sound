@@ -12,15 +12,11 @@ var config = {
   resolve: {
     alias: {
       'react-sound': __dirname + '/../src'
-    },
-    extensions: ['', '.js']
+    }
   },
-  plugins: [
-    new webpack.NoErrorsPlugin()
-  ],
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot', 'babel?stage=0'] }
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel-loader'] }
     ]
   }
 };
