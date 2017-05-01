@@ -20,7 +20,7 @@
   "license": "ISC",
   "homepage": "https://github.com/leoasis/react-sound",
   "dependencies": {
-    "prop-types": "15.5.8",
+    "prop-types": "^15.5.7",
     "react": ">=15.3.0 <16.0.0",
     "soundmanager2": "^2.97.20150601-a"
   },
