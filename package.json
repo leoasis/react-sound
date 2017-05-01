@@ -1,6 +1,6 @@
 {
   "name": "react-sound",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "React Sound component using soundmanager2",
   "main": "lib/index.js",
   "scripts": {
