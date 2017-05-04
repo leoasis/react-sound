@@ -3,8 +3,9 @@ import React, {PropTypes as T} from 'react';
 const pendingCalls = [];
 let initialized = false;
 
+let soundManager;
 if (typeof window !== 'undefined') {
-  var soundManager = require('soundmanager2');
+  soundManager = require('soundmanager2');
   
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
