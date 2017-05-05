@@ -1,9 +1,17 @@
 import React from 'react';
 import T from 'prop-types';
-import { soundManager } from 'soundmanager2';
 
 const pendingCalls = [];
 let initialized = false;
+
+let soundManager;
+if (typeof window !== 'undefined') {
+  soundManager = require('soundmanager2').soundManager;
+  
+  soundManager.onready(() => {
+    pendingCalls.slice().forEach(cb => cb());
+  });
+}
 
 function createSound(options, cb) {
   if (soundManager.ok()) {
@@ -26,10 +34,6 @@ function createSound(options, cb) {
     };
   }
 }
-
-soundManager.onready(() => {
-  pendingCalls.slice().forEach(cb => cb());
-});
 
 function noop() {}
 
