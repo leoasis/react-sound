@@ -54,7 +54,8 @@ export default class Sound extends React.Component {
     volume: T.number,
     onLoading: T.func,
     onPlaying: T.func,
-    onFinishedPlaying: T.func
+    onFinishedPlaying: T.func,
+    debugMode: T.bool
   };
 
   static defaultProps = {
@@ -62,10 +63,15 @@ export default class Sound extends React.Component {
     volume: 100,
     onLoading: noop,
     onPlaying: noop,
-    onFinishedPlaying: noop
+    onFinishedPlaying: noop,
+    debugMode: false
   };
 
   componentDidMount() {
+    soundManager.setup({
+      debugMode: this.props.debugMode
+    })
+
     this.createSound(sound => {
       if (this.props.playStatus === playStatuses.PLAYING) {
         sound.play();
