@@ -63,6 +63,7 @@ class MyComponentWithSound extends React.Component {
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onPlaying (function)*: Function that gets called while the sound is playing. It receives an object with properties `position` and `duration`.
 * *onFinishedPlaying (function)*: Function that gets called when the sound finishes playing (reached end of sound). It receives no parameters.
+* *options (object)*: any other options to be passed to soundmanager2's [createSound](http://www.schillmania.com/projects/soundmanager2/doc/) method.
 
 ## How to contribute
 
