@@ -6,7 +6,7 @@ let initialized = false;
 
 let soundManager;
 if (typeof window !== 'undefined') {
-  soundManager = require('soundmanager2');
+  soundManager = require('soundmanager2').soundManager;
   
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
