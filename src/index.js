@@ -7,7 +7,7 @@ let initialized = false;
 let soundManager;
 if (typeof window !== 'undefined') {
   soundManager = require('soundmanager2').soundManager;
-  
+
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
   });
@@ -54,7 +54,8 @@ export default class Sound extends React.Component {
     volume: T.number,
     onLoading: T.func,
     onPlaying: T.func,
-    onFinishedPlaying: T.func
+    onFinishedPlaying: T.func,
+    debug: T.bool,
   };
 
   static defaultProps = {
@@ -62,7 +63,8 @@ export default class Sound extends React.Component {
     volume: 100,
     onLoading: noop,
     onPlaying: noop,
-    onFinishedPlaying: noop
+    onFinishedPlaying: noop,
+    debug: false,
   };
 
   componentDidMount() {
@@ -114,6 +116,10 @@ export default class Sound extends React.Component {
       if (this.props.volume !== prevProps.volume) {
         sound.setVolume(this.props.volume);
       }
+
+      if (this.props.debug !== prevProps.debug) {
+        this.setDebug(this.props.debug);
+      }
     };
 
     if (this.props.url !== prevProps.url) {
@@ -127,6 +133,8 @@ export default class Sound extends React.Component {
     this.removeSound();
 
     const props = this.props;
+
+    this.setDebug(props.debug);
 
     if (!props.url) { return; }
 
@@ -161,6 +169,10 @@ export default class Sound extends React.Component {
 
       delete this.sound;
     }
+  }
+
+  setDebug(debugMode=false) {
+    soundManager.setup({ debugMode });
   }
 
   render() {

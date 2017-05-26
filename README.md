@@ -16,7 +16,8 @@ render() {
       playFromPosition={300 /* in milliseconds */}
       onLoading={this.handleSongLoading}
       onPlaying={this.handleSongPlaying}
-      onFinishedPlaying={this.handleSongFinishedPlaying} 
+      onFinishedPlaying={this.handleSongFinishedPlaying}
+      debug={true}
     />
   );
 }
@@ -63,6 +64,7 @@ class MyComponentWithSound extends React.Component {
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onPlaying (function)*: Function that gets called while the sound is playing. It receives an object with properties `position` and `duration`.
 * *onFinishedPlaying (function)*: Function that gets called when the sound finishes playing (reached end of sound). It receives no parameters.
+* *debug (boolean)*: Boolean that sets [soundmanager2 `debugMode`](http://www.schillmania.com/projects/soundmanager2/doc/technotes/#debug-output) either on or off. Default set to `false`.
 
 ## How to contribute
 
