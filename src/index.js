@@ -133,6 +133,7 @@ export default class Sound extends React.Component {
     this.stopCreatingSound = createSound({
       url: this.props.url,
       volume: props.volume,
+      position: this.props.playFromPosition || this.props.position || 0,
       whileloading() {
         props.onLoading(this);
       },
