@@ -7,7 +7,7 @@ let initialized = false;
 let soundManager;
 if (typeof window !== 'undefined') {
   soundManager = require('soundmanager2').soundManager;
-  
+
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
   });
@@ -54,7 +54,8 @@ export default class Sound extends React.Component {
     volume: T.number,
     onLoading: T.func,
     onPlaying: T.func,
-    onFinishedPlaying: T.func
+    onFinishedPlaying: T.func,
+    autoLoad: T.bool,
   };
 
   static defaultProps = {
@@ -62,7 +63,8 @@ export default class Sound extends React.Component {
     volume: 100,
     onLoading: noop,
     onPlaying: noop,
-    onFinishedPlaying: noop
+    onFinishedPlaying: noop,
+    autoLoad: false,
   };
 
   componentDidMount() {
@@ -132,6 +134,7 @@ export default class Sound extends React.Component {
 
     this.stopCreatingSound = createSound({
       url: this.props.url,
+      autoLoad: props.autoLoad,
       volume: props.volume,
       position: this.props.playFromPosition || this.props.position || 0,
       whileloading() {
