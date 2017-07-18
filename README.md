@@ -16,7 +16,7 @@ render() {
       playFromPosition={300 /* in milliseconds */}
       onLoading={this.handleSongLoading}
       onPlaying={this.handleSongPlaying}
-      onFinishedPlaying={this.handleSongFinishedPlaying} 
+      onFinishedPlaying={this.handleSongFinishedPlaying}
     />
   );
 }
@@ -60,6 +60,7 @@ class MyComponentWithSound extends React.Component {
 * *playFromPosition (number)*: Seeks to the position specified by this prop, any time it changes. After that, the sound will continue playing (or not, if the `playStatus` is not `PLAYING`). Use this prop to seek to different positions in the sound, but not use it as a controlled component. You should use either this prop or `position`, but not both.
 * *position (number)*: The current position the sound is at. Use this to make the component a controlled component, meaning that you must update this prop on every `onPlaying` callback. You should use either this prop or `playFromPosition`, but not both.
 * *volume (number)*: The current sound's volume. A value between 0 and 100.
+* *autoLoad (boolean)*: If the sound should start loading automatically (defaults to `false`).
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onPlaying (function)*: Function that gets called while the sound is playing. It receives an object with properties `position` and `duration`.
 * *onFinishedPlaying (function)*: Function that gets called when the sound finishes playing (reached end of sound). It receives no parameters.
