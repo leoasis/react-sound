@@ -44,6 +44,9 @@ export default class Example extends React.Component {
           volume={volume}
           onLoading={({bytesLoaded, bytesTotal}) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
           onPlaying={({position}) => console.log(position)}
+          onPause={() => console.log('Paused')}
+          onResume={() => console.log('Resumed')}
+          onStop={() => console.log('Stopped')}
           onFinishedPlaying={() => this.setState({playStatus: Sound.status.STOPPED})} />}
     </div>;
   }
