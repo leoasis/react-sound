@@ -12,12 +12,13 @@ export default class Example extends React.Component {
       currentSong: songs[0],
       position: 0,
       volume: 100,
-      playStatus: Sound.status.PLAYING
+      loop: true,
+      playStatus: Sound.status.PLAYING,
     };
   }
 
   render() {
-    const { volume } = this.state;
+    const { volume, loop } = this.state;
 
     return <div>
       <SongSelector
@@ -27,6 +28,7 @@ export default class Example extends React.Component {
       {this.state.currentSong && this.renderCurrentSong()}
       <PlayerControls
         playStatus={this.state.playStatus}
+        loop={loop}
         onPlay={() => this.setState({playStatus: Sound.status.PLAYING})}
         onPause={() => this.setState({playStatus: Sound.status.PAUSED})}
         onResume={() => this.setState({playStatus: Sound.status.PLAYING})}
@@ -34,6 +36,7 @@ export default class Example extends React.Component {
         onSeek={position => this.setState({ position })}
         onVolumeUp={() => this.setState({volume: volume >= 100 ? volume : volume+10})}
         onVolumeDown={() => this.setState({volume: volume <= 0 ? volume : volume-10})}
+        onToggleLoop={(e) => this.setState({loop: e.target.checked})}
         duration={this.state.currentSong ? this.state.currentSong.duration : 0}
         position={this.state.position} />
       {this.state.currentSong &&
@@ -42,6 +45,7 @@ export default class Example extends React.Component {
           playStatus={this.state.playStatus}
           playFromPosition={this.state.position}
           volume={volume}
+          loop={loop}
           onLoading={({bytesLoaded, bytesTotal}) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
           onPlaying={({position}) => console.log(position)}
           onPause={() => console.log('Paused')}
