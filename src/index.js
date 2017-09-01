@@ -59,6 +59,7 @@ export default class Sound extends React.Component {
     onStop: T.func,
     onFinishedPlaying: T.func,
     autoLoad: T.bool,
+    loop: T.bool,
   };
 
   static defaultProps = {
@@ -71,6 +72,7 @@ export default class Sound extends React.Component {
     onStop: noop,
     onFinishedPlaying: noop,
     autoLoad: false,
+    loop: false,
   };
 
   componentDidMount() {
@@ -135,6 +137,7 @@ export default class Sound extends React.Component {
     this.removeSound();
 
     const props = this.props;
+    const that = this;
 
     if (!props.url) { return; }
 
@@ -159,7 +162,11 @@ export default class Sound extends React.Component {
         props.onStop(this);
       },
       onfinish() {
-        props.onFinishedPlaying();
+        if (that.props.loop && that.props.playStatus === playStatuses.PLAYING) {
+          that.sound.play()
+        } else {
+          props.onFinishedPlaying();
+        }
       }
     }, sound => {
       this.sound = sound;
