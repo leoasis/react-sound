@@ -43,6 +43,7 @@ export default class Example extends React.Component {
           playFromPosition={this.state.position}
           volume={volume}
           onLoading={({bytesLoaded, bytesTotal}) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+          onLoad={() => console.log('Loaded')}
           onPlaying={({position}) => console.log(position)}
           onPause={() => console.log('Paused')}
           onResume={() => console.log('Resumed')}
