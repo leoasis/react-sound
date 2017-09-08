@@ -47,6 +47,7 @@ export default class Example extends React.Component {
           volume={volume}
           loop={loop}
           onLoading={({bytesLoaded, bytesTotal}) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+          onLoad={() => console.log('Loaded')}
           onPlaying={({position}) => console.log(position)}
           onPause={() => console.log('Paused')}
           onResume={() => console.log('Resumed')}
