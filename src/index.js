@@ -53,6 +53,7 @@ export default class Sound extends React.Component {
     playFromPosition: T.number,
     volume: T.number,
     onLoading: T.func,
+    onLoad: T.func,
     onPlaying: T.func,
     onPause: T.func,
     onResume: T.func,
@@ -67,6 +68,7 @@ export default class Sound extends React.Component {
     volume: 100,
     onLoading: noop,
     onPlaying: noop,
+    onLoad: noop,
     onPause: noop,
     onResume: noop,
     onStop: noop,
@@ -151,6 +153,9 @@ export default class Sound extends React.Component {
       },
       whileplaying() {
         props.onPlaying(this);
+      },
+      onload() {
+        props.onLoad(this);
       },
       onpause() {
         props.onPause(this);
