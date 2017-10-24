@@ -61,6 +61,7 @@ class MyComponentWithSound extends React.Component {
 * *position (number)*: The current position the sound is at. Use this to make the component a controlled component, meaning that you must update this prop on every `onPlaying` callback. You should use either this prop or `playFromPosition`, but not both.
 * *volume (number)*: The current sound's volume. A value between 0 and 100.
 * *autoLoad (boolean)*: If the sound should start loading automatically (defaults to `false`).
+* *loop (boolean)*: If the sound should continue playing in a loop (defaults to `false`).
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onLoad (function)*: Function that gets called after the sound has finished loading. It receives an object with property `loaded`, a boolean set to true if the sound has finished loading successfully.
 * *onPlaying (function)*: Function that gets called while the sound is playing. It receives an object with properties `position` and `duration`.
