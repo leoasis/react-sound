@@ -105,7 +105,8 @@ export default [
     duration: 0
   },
   {
-    url: 'https://raw.githubusercontent.com/scottschiller/SoundManager2/master/demo/_mp3/sine, square, sawtooth, rando.mp3',
+    url:
+      'https://raw.githubusercontent.com/scottschiller/SoundManager2/master/demo/_mp3/sine, square, sawtooth, rando.mp3',
     title: 'sine, square, sawtooth, rando',
     duration: 0
   },
@@ -113,5 +114,5 @@ export default [
     url: 'https://raw.githubusercontent.com/scottschiller/SoundManager2/master/demo/_mp3/walking.mp3',
     title: 'walking',
     duration: 0
-  },
-]
+  }
+];

@@ -10,12 +10,7 @@
     "lint": "eslint src test",
     "prepublish": "npm run clean && npm run build"
   },
-  "keywords": [
-    "react",
-    "react-component",
-    "sound",
-    "soundmanager2"
-  ],
+  "keywords": ["react", "react-component", "sound", "soundmanager2"],
   "author": "Leonardo Andres Garcia Crespo <leoasis@gmail.com>",
   "license": "ISC",
   "homepage": "https://github.com/leoasis/react-sound",

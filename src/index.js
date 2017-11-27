@@ -60,7 +60,7 @@ export default class Sound extends React.Component {
     onStop: T.func,
     onFinishedPlaying: T.func,
     autoLoad: T.bool,
-    loop: T.bool,
+    loop: T.bool
   };
 
   static defaultProps = {
@@ -74,7 +74,7 @@ export default class Sound extends React.Component {
     onStop: noop,
     onFinishedPlaying: noop,
     autoLoad: false,
-    loop: false,
+    loop: false
   };
 
   componentDidMount() {
@@ -90,8 +90,10 @@ export default class Sound extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const withSound = (sound) => {
-      if (!sound) { return; }
+    const withSound = sound => {
+      if (!sound) {
+        return;
+      }
 
       if (this.props.playStatus === playStatuses.PLAYING) {
         if (sound.playState === 0) {
@@ -105,7 +107,8 @@ export default class Sound extends React.Component {
         if (sound.playState !== 0) {
           sound.stop();
         }
-      } else { // this.props.playStatus === playStatuses.PAUSED
+      } else {
+        // this.props.playStatus === playStatuses.PAUSED
         if (!sound.paused) {
           sound.pause();
         }
@@ -116,9 +119,7 @@ export default class Sound extends React.Component {
       }
 
       if (this.props.position != null) {
-        if (sound.position !== this.props.position &&
-          Math.round(sound.position) !== Math.round(this.props.position)) {
-
+        if (sound.position !== this.props.position && Math.round(sound.position) !== Math.round(this.props.position)) {
           sound.setPosition(this.props.position);
         }
       }
@@ -141,42 +142,47 @@ export default class Sound extends React.Component {
     const props = this.props;
     const that = this;
 
-    if (!props.url) { return; }
+    if (!props.url) {
+      return;
+    }
 
-    this.stopCreatingSound = createSound({
-      url: this.props.url,
-      autoLoad: props.autoLoad,
-      volume: props.volume,
-      position: this.props.playFromPosition || this.props.position || 0,
-      whileloading() {
-        props.onLoading(this);
-      },
-      whileplaying() {
-        props.onPlaying(this);
-      },
-      onload() {
-        props.onLoad(this);
-      },
-      onpause() {
-        props.onPause(this);
-      },
-      onresume() {
-        props.onResume(this);
-      },
-      onstop() {
-        props.onStop(this);
-      },
-      onfinish() {
-        if (that.props.loop && that.props.playStatus === playStatuses.PLAYING) {
-          that.sound.play()
-        } else {
-          props.onFinishedPlaying();
+    this.stopCreatingSound = createSound(
+      {
+        url: this.props.url,
+        autoLoad: props.autoLoad,
+        volume: props.volume,
+        position: this.props.playFromPosition || this.props.position || 0,
+        whileloading() {
+          props.onLoading(this);
+        },
+        whileplaying() {
+          props.onPlaying(this);
+        },
+        onload() {
+          props.onLoad(this);
+        },
+        onpause() {
+          props.onPause(this);
+        },
+        onresume() {
+          props.onResume(this);
+        },
+        onstop() {
+          props.onStop(this);
+        },
+        onfinish() {
+          if (that.props.loop && that.props.playStatus === playStatuses.PLAYING) {
+            that.sound.play();
+          } else {
+            props.onFinishedPlaying();
+          }
         }
+      },
+      sound => {
+        this.sound = sound;
+        callback(sound);
       }
-    }, sound => {
-      this.sound = sound;
-      callback(sound);
-    });
+    );
   }
 
   removeSound() {
