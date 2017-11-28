@@ -158,7 +158,7 @@ export default class Sound extends React.Component {
       },
       onerror(errorCode, description) {
         props.onError(errorCode, description, this);
-      }
+      },
       onload() {
         props.onLoad(this);
       },
