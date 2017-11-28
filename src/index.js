@@ -156,8 +156,8 @@ export default class Sound extends React.Component {
       whileplaying() {
         props.onPlaying(this);
       },
-      onerror() {
-        props.onError(this);
+      onerror(errorCode, description) {
+        props.onError(errorCode, description, this);
       }
       onload() {
         props.onLoad(this);
