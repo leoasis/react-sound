@@ -128,6 +128,10 @@ export default class Sound extends React.Component {
       if (this.props.volume !== prevProps.volume) {
         sound.setVolume(this.props.volume);
       }
+
+      sound.options.onfinish = () => this.props.onFinishedPlaying() || null;
+      sound.options.whileplaying = () => this.props.onPlaying(this) || null;
+      sound.options.whileloading = () => this.props.onLoading(this) || null;
     };
 
     if (this.props.url !== prevProps.url) {
