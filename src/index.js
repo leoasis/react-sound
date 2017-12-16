@@ -52,6 +52,7 @@ export default class Sound extends React.Component {
     position: T.number,
     playFromPosition: T.number,
     volume: T.number,
+    playbackRate: T.number,
     onError: T.func,
     onLoading: T.func,
     onLoad: T.func,
@@ -67,6 +68,7 @@ export default class Sound extends React.Component {
   static defaultProps = {
     playFromPosition: 0,
     volume: 100,
+    playbackRate: 1,
     onError: noop,
     onLoading: noop,
     onPlaying: noop,
@@ -128,6 +130,10 @@ export default class Sound extends React.Component {
       if (this.props.volume !== prevProps.volume) {
         sound.setVolume(this.props.volume);
       }
+
+      if (this.props.playbackRate !== prevProps.playbackRate) {
+        sound.setPlaybackRate(this.props.playbackRate);
+      }
     };
 
     if (this.props.url !== prevProps.url) {
@@ -150,6 +156,7 @@ export default class Sound extends React.Component {
       autoLoad: props.autoLoad,
       volume: props.volume,
       position: this.props.playFromPosition || this.props.position || 0,
+      playbackRate: props.playbackRate,
       whileloading() {
         props.onLoading(this);
       },
