@@ -39,6 +39,11 @@ export default class PlayerControls extends React.Component {
           {controls.pause && control('Pause', this.props.onPause)}
           {controls.resume && control('Resume', this.props.onResume)}
         </ul>
+        <div>
+          Playback Rate ({this.props.playbackRate}):
+          <button onClick={this.props.onPlaybackRateDown}>-</button>
+          <button onClick={this.props.onPlaybackRateUp}>+</button>
+        </div>
         Loop?:
         <input type="checkbox" checked={this.props.loop} onChange={this.props.onToggleLoop} />
       </div>
