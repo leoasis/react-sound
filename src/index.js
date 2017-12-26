@@ -7,7 +7,11 @@ let initialized = false;
 let soundManager;
 // Allow server side rendering
 if (typeof window !== 'undefined') {
-  soundManager = require('soundmanager2').soundManager;
+  if (process.env.NODE_ENV !== 'production') {
+    ({ soundManager } = require('soundmanager2'));
+  } else {
+    ({ soundManager } = require('soundmanager2/script/soundmanager2-nodebug'));
+  }
 
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
