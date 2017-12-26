@@ -15,6 +15,8 @@ function control(text, clickHandler) {
   );
 }
 
+const numberFormat = new Intl.NumberFormat([], { minimumFractionDigits: 2 });
+
 export default class PlayerControls extends React.Component {
   render() {
     return <div>{this.renderControls()}</div>;
@@ -40,8 +42,11 @@ export default class PlayerControls extends React.Component {
           {controls.resume && control('Resume', this.props.onResume)}
         </ul>
         <div>
-          Playback Rate ({this.props.playbackRate}):
+          Playback Rate:
           <button onClick={this.props.onPlaybackRateDown}>-</button>
+          {' '}
+          {numberFormat.format(this.props.playbackRate)}
+          {' '}
           <button onClick={this.props.onPlaybackRateUp}>+</button>
         </div>
         Loop?:

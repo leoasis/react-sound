@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 var config = {
   entry: {
-    app: './src/index'
+    app: ['react-hot-loader/patch', './src/index']
   },
   output: {
     filename: '[name].js',
@@ -15,8 +15,23 @@ var config = {
     }
   },
   module: {
-    loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel-loader'] }]
-  }
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          plugins: [
+            'react-hot-loader/babel'
+          ]
+        }
+      }
+    ]
+  },
+  plugins: [
+    new webpack.NamedModulesPlugin()
+  ]
 };
 
 module.exports = config;
