@@ -83,11 +83,7 @@ export default class Sound extends React.Component {
   };
 
   componentDidMount() {
-    this.createSound(sound => {
-      if (this.props.playStatus === playStatuses.PLAYING) {
-        sound.play();
-      }
-    });
+    this.createSound(sound => this.updateSound(sound));
   }
 
   componentWillUnmount() {
@@ -95,52 +91,52 @@ export default class Sound extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const withSound = (sound) => {
-      if (!sound) { return; }
-
-      if (this.props.playStatus === playStatuses.PLAYING) {
-        if (sound.playState === 0) {
-          sound.play();
-        }
-
-        if (sound.paused) {
-          sound.resume();
-        }
-      } else if (this.props.playStatus === playStatuses.STOPPED) {
-        if (sound.playState !== 0) {
-          sound.stop();
-        }
-      } else { // this.props.playStatus === playStatuses.PAUSED
-        if (!sound.paused) {
-          sound.pause();
-        }
-      }
-
-      if (this.props.playFromPosition !== prevProps.playFromPosition) {
-        sound.setPosition(this.props.playFromPosition);
-      }
-
-      if (this.props.position != null) {
-        if (sound.position !== this.props.position &&
-          Math.round(sound.position) !== Math.round(this.props.position)) {
-
-          sound.setPosition(this.props.position);
-        }
-      }
-
-      if (this.props.volume !== prevProps.volume) {
-        sound.setVolume(this.props.volume);
-      }
-
-      if (this.props.playbackRate !== prevProps.playbackRate) {
-        sound.setPlaybackRate(this.props.playbackRate);
-      }
-    };
-
     if (this.props.url !== prevProps.url) {
-      this.createSound(withSound);
+      this.createSound(sound => this.updateSound(sound, prevProps));
     } else {
-      withSound(this.sound);
+      this.updateSound(this.sound);
+    }
+  }
+
+  updateSound(sound, prevProps = {}) {
+    if (!sound) { return; }
+
+    if (this.props.playStatus === playStatuses.PLAYING) {
+      if (sound.playState === 0) {
+        sound.play();
+      }
+
+      if (sound.paused) {
+        sound.resume();
+      }
+    } else if (this.props.playStatus === playStatuses.STOPPED) {
+      if (sound.playState !== 0) {
+        sound.stop();
+      }
+    } else { // this.props.playStatus === playStatuses.PAUSED
+      if (!sound.paused) {
+        sound.pause();
+      }
+    }
+
+    if (this.props.playFromPosition !== prevProps.playFromPosition) {
+      sound.setPosition(this.props.playFromPosition);
+    }
+
+    if (this.props.position != null) {
+      if (sound.position !== this.props.position &&
+        Math.round(sound.position) !== Math.round(this.props.position)) {
+
+        sound.setPosition(this.props.position);
+      }
+    }
+
+    if (this.props.volume !== prevProps.volume) {
+      sound.setVolume(this.props.volume);
+    }
+
+    if (this.props.playbackRate !== prevProps.playbackRate) {
+      sound.setPlaybackRate(this.props.playbackRate);
     }
   }
 
