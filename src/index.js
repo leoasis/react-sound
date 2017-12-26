@@ -1,10 +1,11 @@
 import React from 'react';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 
 const pendingCalls = [];
 let initialized = false;
 
 let soundManager;
+// Allow server side rendering
 if (typeof window !== 'undefined') {
   soundManager = require('soundmanager2').soundManager;
 
@@ -47,22 +48,22 @@ export default class Sound extends React.Component {
   static status = playStatuses;
 
   static propTypes = {
-    url: T.string.isRequired,
-    playStatus: T.oneOf(Object.keys(playStatuses)).isRequired,
-    position: T.number,
-    playFromPosition: T.number,
-    volume: T.number,
-    playbackRate: T.number,
-    onError: T.func,
-    onLoading: T.func,
-    onLoad: T.func,
-    onPlaying: T.func,
-    onPause: T.func,
-    onResume: T.func,
-    onStop: T.func,
-    onFinishedPlaying: T.func,
-    autoLoad: T.bool,
-    loop: T.bool,
+    url: PropTypes.string.isRequired,
+    playStatus: PropTypes.oneOf(Object.keys(playStatuses)).isRequired,
+    position: PropTypes.number,
+    playFromPosition: PropTypes.number,
+    volume: PropTypes.number,
+    playbackRate: PropTypes.number,
+    onError: PropTypes.func,
+    onLoading: PropTypes.func,
+    onLoad: PropTypes.func,
+    onPlaying: PropTypes.func,
+    onPause: PropTypes.func,
+    onResume: PropTypes.func,
+    onStop: PropTypes.func,
+    onFinishedPlaying: PropTypes.func,
+    autoLoad: PropTypes.bool,
+    loop: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -146,43 +147,42 @@ export default class Sound extends React.Component {
   createSound(callback) {
     this.removeSound();
 
-    const props = this.props;
-    const that = this;
+    const instance = this;
 
-    if (!props.url) { return; }
+    if (!this.props.url) { return; }
 
     this.stopCreatingSound = createSound({
       url: this.props.url,
-      autoLoad: props.autoLoad,
-      volume: props.volume,
+      autoLoad: this.props.autoLoad,
+      volume: this.props.volume,
       position: this.props.playFromPosition || this.props.position || 0,
-      playbackRate: props.playbackRate,
+      playbackRate: this.props.playbackRate,
       whileloading() {
-        props.onLoading(this);
+        instance.props.onLoading(this);
       },
       whileplaying() {
-        props.onPlaying(this);
+        instance.props.onPlaying(this);
       },
       onerror(errorCode, description) {
-        props.onError(errorCode, description, this);
+        instance.props.onError(errorCode, description, this);
       },
       onload() {
-        props.onLoad(this);
+        instance.props.onLoad(this);
       },
       onpause() {
-        props.onPause(this);
+        instance.props.onPause(this);
       },
       onresume() {
-        props.onResume(this);
+        instance.props.onResume(this);
       },
       onstop() {
-        props.onStop(this);
+        instance.props.onStop(this);
       },
       onfinish() {
-        if (that.props.loop && that.props.playStatus === playStatuses.PLAYING) {
-          that.sound.play()
+        if (instance.props.loop && instance.props.playStatus === playStatuses.PLAYING) {
+          instance.sound.play()
         } else {
-          props.onFinishedPlaying();
+          instance.props.onFinishedPlaying();
         }
       }
     }, sound => {
