@@ -71,7 +71,6 @@ export default class Sound extends React.Component {
   };
 
   static defaultProps = {
-    playFromPosition: 0,
     volume: 100,
     playbackRate: 1,
     onError: noop,
@@ -123,8 +122,10 @@ export default class Sound extends React.Component {
       }
     }
 
-    if (this.props.playFromPosition !== prevProps.playFromPosition) {
-      sound.setPosition(this.props.playFromPosition);
+    if (this.props.playFromPosition != null) {
+      if (this.props.playFromPosition !== prevProps.playFromPosition) {
+        sound.setPosition(this.props.playFromPosition);
+      }
     }
 
     if (this.props.position != null) {

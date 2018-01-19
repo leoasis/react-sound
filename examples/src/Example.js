@@ -9,13 +9,46 @@ export default class Example extends React.Component {
     super(props);
 
     this.state = {
+      controlled: true,
       currentSong: songs[0],
       position: 0,
       volume: 100,
       playbackRate: 1,
-      loop: true,
+      loop: false,
       playStatus: Sound.status.PLAYING
     };
+  }
+
+  getStatusText() {
+    switch (this.state.playStatus) {
+      case Sound.status.PLAYING:
+        return 'playing';
+      case Sound.status.PAUSED:
+        return 'paused';
+      case Sound.status.STOPPED:
+        return 'stopped';
+      default:
+        return '(unknown)';
+    }
+  }
+
+  handleSongSelected = (song) => {
+    this.setState({ currentSong: song, position: 0 });
+  }
+
+  handleControlledComponentChange = (ev) => {
+    this.setState({
+      controlled: ev.target.checked,
+      position: 0
+    });
+  }
+
+  renderCurrentSong() {
+    return (
+      <p>
+        Current song {this.state.currentSong.title}. Song is {this.getStatusText()}
+      </p>
+    );
   }
 
   render() {
@@ -26,8 +59,9 @@ export default class Example extends React.Component {
         <SongSelector
           songs={songs}
           selectedSong={this.state.currentSong}
-          onSongSelected={this.handleSongSelected.bind(this)}
+          onSongSelected={this.handleSongSelected}
         />
+        <label><input type="checkbox" checked={this.state.controlled} onChange={this.handleControlledComponentChange}/> Controlled Component</label>
         {this.state.currentSong && this.renderCurrentSong()}
         <PlayerControls
           playStatus={this.state.playStatus}
@@ -47,48 +81,41 @@ export default class Example extends React.Component {
           playbackRate={playbackRate}
         />
         {this.state.currentSong && (
-          <Sound
-            url={this.state.currentSong.url}
-            playStatus={this.state.playStatus}
-            playFromPosition={this.state.position}
-            volume={volume}
-            playbackRate={playbackRate}
-            loop={loop}
-            onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
-            onLoad={() => console.log('Loaded')}
-            onPlaying={({ position }) => console.log(position)}
-            onPause={() => console.log('Paused')}
-            onResume={() => console.log('Resumed')}
-            onStop={() => console.log('Stopped')}
-            onFinishedPlaying={() => this.setState({ playStatus: Sound.status.STOPPED })}
-          />
+          this.state.controlled ? (
+            <Sound
+              url={this.state.currentSong.url}
+              playStatus={this.state.playStatus}
+              position={this.state.position}
+              volume={volume}
+              playbackRate={playbackRate}
+              loop={loop}
+              onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+              onLoad={() => console.log('Loaded')}
+              onPlaying={({ position }) => this.setState({ position })}
+              onPause={() => console.log('Paused')}
+              onResume={() => console.log('Resumed')}
+              onStop={() => console.log('Stopped')}
+              onFinishedPlaying={() => this.setState({ playStatus: Sound.status.STOPPED })}
+            />
+          ) : (
+            <Sound
+              url={this.state.currentSong.url}
+              playStatus={this.state.playStatus}
+              playFromPosition={this.state.position}
+              volume={volume}
+              playbackRate={playbackRate}
+              loop={loop}
+              onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+              onLoad={() => console.log('Loaded')}
+              onPlaying={({ position }) => console.log('Position', position)}
+              onPause={() => console.log('Paused')}
+              onResume={() => console.log('Resumed')}
+              onStop={() => console.log('Stopped')}
+              onFinishedPlaying={() => this.setState({ playStatus: Sound.status.STOPPED })}
+            />
+          )
         )}
       </div>
     );
-  }
-
-  getStatusText() {
-    switch (this.state.playStatus) {
-      case Sound.status.PLAYING:
-        return 'playing';
-      case Sound.status.PAUSED:
-        return 'paused';
-      case Sound.status.STOPPED:
-        return 'stopped';
-      default:
-        return '(unknown)';
-    }
-  }
-
-  renderCurrentSong() {
-    return (
-      <p>
-        Current song {this.state.currentSong.title}. Song is {this.getStatusText()}
-      </p>
-    );
-  }
-
-  handleSongSelected(song) {
-    this.setState({ currentSong: song, position: 0 });
   }
 }
