@@ -36,6 +36,8 @@ Yes! It's really easy to use sounds in your app as part of the component tree in
 
 ## How to use
 
+**This library automatically looks for files in React's `public/` folder**
+
 ```js
 var React = require('react');
 var Sound = require('react-sound').default;
