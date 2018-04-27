@@ -71,6 +71,7 @@ class MyComponentWithSound extends React.Component {
 * *onResume (function)*: Function that gets called while the sound is resumed playing. It receives an object with properties `position` and `duration`.
 * *onStop (function)*: Function that gets called while the sound playback is stopped. It receives an object with properties `position` and `duration`.
 * *onFinishedPlaying (function)*: Function that gets called when the sound finishes playing (reached end of sound). It receives no parameters.
+* *onBufferChange (function)*: Function that gets called when the sound buffering status changes. It receives a single boolean representing the buffer state.
 
 ## How to contribute
 

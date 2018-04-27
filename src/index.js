@@ -66,6 +66,7 @@ export default class Sound extends React.Component {
     onResume: PropTypes.func,
     onStop: PropTypes.func,
     onFinishedPlaying: PropTypes.func,
+    onBufferChange: PropTypes.func,
     autoLoad: PropTypes.bool,
     loop: PropTypes.bool,
   };
@@ -81,6 +82,7 @@ export default class Sound extends React.Component {
     onResume: noop,
     onStop: noop,
     onFinishedPlaying: noop,
+    onBufferChange: noop,
     autoLoad: false,
     loop: false,
   };
@@ -185,6 +187,9 @@ export default class Sound extends React.Component {
         } else {
           instance.props.onFinishedPlaying();
         }
+      },
+      onbufferchange() {
+        instance.props.onBufferChange(this.isBuffering);
       }
     }, sound => {
       this.sound = sound;
