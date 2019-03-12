@@ -70,6 +70,7 @@ export default class Sound extends React.Component {
     autoLoad: PropTypes.bool,
     loop: PropTypes.bool,
     muted: PropTypes.bool,
+    solo: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -87,6 +88,7 @@ export default class Sound extends React.Component {
     autoLoad: false,
     loop: false,
     muted: false,
+    solo: false,
   };
 
   componentDidMount() {
@@ -110,10 +112,16 @@ export default class Sound extends React.Component {
 
     if (this.props.playStatus === playStatuses.PLAYING) {
       if (sound.playState === 0) {
+        if (this.props.solo) {
+          soundManager.stopAll()
+        }
         sound.play();
       }
 
       if (sound.paused) {
+        if (this.props.solo) {
+          soundManager.stopAll()
+        }
         sound.resume();
       }
     } else if (this.props.playStatus === playStatuses.STOPPED) {
