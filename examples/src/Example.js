@@ -15,6 +15,7 @@ export default class Example extends React.Component {
       volume: 100,
       playbackRate: 1,
       loop: false,
+      muted: false,
       playStatus: Sound.status.PLAYING
     };
   }
@@ -52,7 +53,7 @@ export default class Example extends React.Component {
   }
 
   render() {
-    const { volume, playbackRate, loop } = this.state;
+    const { volume, playbackRate, loop, muted } = this.state;
 
     return (
       <div>
@@ -66,6 +67,7 @@ export default class Example extends React.Component {
         <PlayerControls
           playStatus={this.state.playStatus}
           loop={loop}
+          muted={muted}
           onPlay={() => this.setState({ playStatus: Sound.status.PLAYING })}
           onPause={() => this.setState({ playStatus: Sound.status.PAUSED })}
           onResume={() => this.setState({ playStatus: Sound.status.PLAYING })}
@@ -76,6 +78,7 @@ export default class Example extends React.Component {
           onPlaybackRateUp={() => this.setState({ playbackRate: playbackRate >= 4 ? playbackRate : playbackRate + 0.5 })}
           onPlaybackRateDown={() => this.setState({ playbackRate: playbackRate <= 0.5 ? playbackRate : playbackRate - 0.5 })}
           onToggleLoop={e => this.setState({ loop: e.target.checked })}
+          onToggleMute={e => this.setState({ muted: e.target.checked })}
           duration={this.state.currentSong ? this.state.currentSong.duration : 0}
           position={this.state.position}
           playbackRate={playbackRate}
@@ -89,6 +92,7 @@ export default class Example extends React.Component {
               volume={volume}
               playbackRate={playbackRate}
               loop={loop}
+              muted={muted}
               onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
               onLoad={() => console.log('Loaded')}
               onPlaying={({ position }) => this.setState({ position })}
@@ -105,6 +109,7 @@ export default class Example extends React.Component {
               volume={volume}
               playbackRate={playbackRate}
               loop={loop}
+              muted={muted}
               onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
               onLoad={() => console.log('Loaded')}
               onPlaying={({ position }) => console.log('Position', position)}

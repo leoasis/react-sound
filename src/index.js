@@ -69,6 +69,7 @@ export default class Sound extends React.Component {
     onBufferChange: PropTypes.func,
     autoLoad: PropTypes.bool,
     loop: PropTypes.bool,
+    muted: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -85,6 +86,7 @@ export default class Sound extends React.Component {
     onBufferChange: noop,
     autoLoad: false,
     loop: false,
+    muted: false,
   };
 
   componentDidMount() {
@@ -145,6 +147,14 @@ export default class Sound extends React.Component {
     if (this.props.playbackRate !== prevProps.playbackRate) {
       sound.setPlaybackRate(this.props.playbackRate);
     }
+
+    if (this.props.muted !== prevProps.muted) {
+      if (this.props.muted) {
+        sound.mute();
+      } else {
+        sound.unmute();
+      }
+    }
   }
 
   createSound(callback) {
@@ -190,7 +200,8 @@ export default class Sound extends React.Component {
       },
       onbufferchange() {
         instance.props.onBufferChange(this.isBuffering);
-      }
+      },
+      muted: instance.props.muted,
     }, sound => {
       this.sound = sound;
       callback(sound);
