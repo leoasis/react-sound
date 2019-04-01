@@ -108,7 +108,16 @@ export default class Sound extends React.Component {
 
     if (this.props.playStatus === playStatuses.PLAYING) {
       if (sound.playState === 0) {
-        sound.play();
+        var playPromise = sound.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // Automatic playback started!
+          })
+          .catch(error => {
+            // Auto-play was prevented
+          });
+        }
       }
 
       if (sound.paused) {
