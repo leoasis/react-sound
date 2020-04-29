@@ -13,6 +13,11 @@ if (typeof window !== 'undefined') {
     ({ soundManager } = require('soundmanager2/script/soundmanager2-nodebug'));
   }
 
+  soundManager.setup({
+    useConsole: false,
+    debugMode: false,
+  })
+
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
   });
