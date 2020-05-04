@@ -63,6 +63,7 @@ class MyComponentWithSound extends React.Component {
 * *playbackRate (number)*: Number affecting sound playback. A value between 0.5 and 4 of normal rate (1).
 * *autoLoad (boolean)*: If the sound should start loading automatically (defaults to `false`).
 * *loop (boolean)*: If the sound should continue playing in a loop (defaults to `false`).
+* *muted (boolean)*: Mutes the sound without affecting volume setting (defaults to `false`).
 * *onError (function)*: Function that gets called when the sound fails to load, or fails during load or playback. It receives the arguments `errorCode` and `description` with details about the error.
 * *onLoading (function)*: Function that gets called while the sound is loading. It receives an object with properties `bytesLoaded`, `bytesTotal` and `duration`.
 * *onLoad (function)*: Function that gets called after the sound has finished loading. It receives an object with property `loaded`, a boolean set to true if the sound has finished loading successfully.
