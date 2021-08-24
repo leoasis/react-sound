@@ -10,6 +10,10 @@
     "lint": "eslint src test",
     "prepublish": "npm run clean && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leoasis/react-sound.git"
+  },
   "keywords": [
     "react",
     "react-component",
