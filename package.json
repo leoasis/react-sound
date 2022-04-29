@@ -1,6 +1,6 @@
 {
   "name": "@studysync/react-sound",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "React Sound component using soundmanager2",
   "main": "lib/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "soundmanager2": "^2.97.20170602"
   },
   "peerDependencies": {
-    "react": "^15.3.0 || ^16.0.0-0 || ^17.0.0"
+    "react": ">=17"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
