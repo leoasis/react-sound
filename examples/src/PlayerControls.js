@@ -49,8 +49,14 @@ export default class PlayerControls extends React.Component {
           {' '}
           <button onClick={this.props.onPlaybackRateUp}>+</button>
         </div>
-        Loop?:
-        <input type="checkbox" checked={this.props.loop} onChange={this.props.onToggleLoop} />
+        <div>
+          Loop?:
+          <input type="checkbox" checked={this.props.loop} onChange={this.props.onToggleLoop} />
+          </div>
+        <div>
+          Mute?:
+          <input type="checkbox" checked={this.props.muted} onChange={this.props.onToggleMute} />
+        </div>
       </div>
     );
   }

@@ -13,6 +13,11 @@ if (typeof window !== 'undefined') {
     ({ soundManager } = require('soundmanager2/script/soundmanager2-nodebug'));
   }
 
+  soundManager.setup({
+    useConsole: false,
+    debugMode: false,
+  })
+
   soundManager.onready(() => {
     pendingCalls.slice().forEach(cb => cb());
   });
@@ -69,6 +74,8 @@ export default class Sound extends React.Component {
     onBufferChange: PropTypes.func,
     autoLoad: PropTypes.bool,
     loop: PropTypes.bool,
+    muted: PropTypes.bool,
+    solo: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -85,6 +92,8 @@ export default class Sound extends React.Component {
     onBufferChange: noop,
     autoLoad: false,
     loop: false,
+    muted: false,
+    solo: false,
   };
 
   componentDidMount() {
@@ -108,10 +117,16 @@ export default class Sound extends React.Component {
 
     if (this.props.playStatus === playStatuses.PLAYING) {
       if (sound.playState === 0) {
+        if (this.props.solo) {
+          soundManager.stopAll()
+        }
         sound.play();
       }
 
       if (sound.paused) {
+        if (this.props.solo) {
+          soundManager.stopAll()
+        }
         sound.resume();
       }
     } else if (this.props.playStatus === playStatuses.STOPPED) {
@@ -144,6 +159,14 @@ export default class Sound extends React.Component {
 
     if (this.props.playbackRate !== prevProps.playbackRate) {
       sound.setPlaybackRate(this.props.playbackRate);
+    }
+
+    if (this.props.muted !== prevProps.muted) {
+      if (this.props.muted) {
+        sound.mute();
+      } else {
+        sound.unmute();
+      }
     }
   }
 
@@ -190,7 +213,8 @@ export default class Sound extends React.Component {
       },
       onbufferchange() {
         instance.props.onBufferChange(this.isBuffering);
-      }
+      },
+      muted: instance.props.muted,
     }, sound => {
       this.sound = sound;
       callback(sound);
